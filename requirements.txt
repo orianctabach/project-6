@@ -1,4 +1,10 @@
-pandas
-streamlit
+pandas==2.0.3
+streamlit==1.25.0
+plotly==5.15.0
 plotly.express
-altair
+altair==5.0.1
+scipy==1.11.1
+matplotlib
+
+
+
