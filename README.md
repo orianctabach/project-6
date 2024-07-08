@@ -3,7 +3,7 @@
 **Used Car Sales Analysis**
 
 This Streamlit app explores various factors that might influence how long it takes to sell a used car. 
-You can see it deployed on Render here: [link](https://project-6-2qm5.onrender.com)
+You can see it deployed on Render here: [link](https://project-6-orianctabach.onrender.com/)
 
 **Data Source:**
 
