@@ -6,6 +6,7 @@ import plotly_express as px
 df = pd.read_csv("vehicles_us.csv")
 
 st.header('Raw Data')
+st.text('To get a sense of the data we are dealing with, it would be beneficial to view a portion of the table')
 
 st.dataframe(df)
 
@@ -59,6 +60,48 @@ for d in df.date_posted:
 df["trim_date"]=trim_date
 st.dataframe(df.trim_date.value_counts())
 
+# explanation
 
+date_index=[]
+for d in df.trim_date:
+    if c in ["2019-04"]:
+        date_index.append(False)
+    else:
+        date_index.append(True)
+df3=df[date_index]
+
+st.write(px.histogram(df3, x="days_listed", color="trim_date", barmode="overlay", histnorm='probability'))
+
+# explanation
+
+#-------------------
+st.header('Impact of car price on  number of days a deal is made')
+# explanation
+
+
+st.write(px.scatter(df, x='days_listed', y='price'))
+
+# explanation
+
+res_price=[]
+for p in df.price:
+    if p>150000:
+        res_price.append(False)
+    else:
+        res_price.append(True)
+
+df4=df[res_price]
+
+st.write(px.scatter(df4, x='days_listed', y='price'))
+
+# explanation
+
+opacity_ = st.checkbox('Render the points are transparecy?', value=False)
+if opacity_:
+    st.write(px.scatter(df4, x='days_listed', y='price', opacity=(0.05)))
+else:
+    st.write(px.scatter(df4, x='days_listed', y='price', opacity=(0.1)))
+
+# explanation
 
 #-------------------
