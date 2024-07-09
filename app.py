@@ -154,7 +154,7 @@ opacity_ = st.checkbox('Render the points are transparecy?', value=False)
 if opacity_:
     st.write(px.scatter(df4, x='days_listed', y='price', opacity=(0.05)))
 else:
-    st.write(px.scatter(df4, x='days_listed', y='price', opacity=(0.1)))
+    st.write(px.scatter(df4, x='days_listed', y='price', opacity=(0.9)))
 
 st.markdown("The visualization reveals a cluster of data points indicating a "
             "specific price range that is relatively inexpensive and "
