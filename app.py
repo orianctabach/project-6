@@ -1,15 +1,35 @@
 import streamlit as st
 import pandas as pd
 import plotly_express as px
+import numpy as np 
+
 
 
 df = pd.read_csv("vehicles_us.csv")
 
-st.header('Raw Data')
+st.header('Viewing the Data')
 st.markdown(
     "To get a sense of the data we are dealing with, "
-     "it would be beneficial to view a portion of the table:"
+     "it would be beneficial to view a portion of the table"
+     "(after cleaning it a bit):"
      )
+
+#filling missing values
+
+df['paint_color']=df['paint_color'].fillna('Unknown')
+df['is_4wd']=df['is_4wd'].fillna(0)
+df['model_year'] = df['model_year'].fillna(df.groupby(['model'])['model_year'].transform('median'))
+df['odometer'] = df['odometer'].fillna(df.groupby(['model_year'])['odometer'].transform('mean'))
+
+mean_odometer=df['odometer'].mean()
+df['odometer'] = df['odometer'].fillna(mean_odometer)
+
+new_cylinders = df['cylinders'].fillna(df.groupby(['model'])['cylinders'].transform('mean'))
+df['cylinders']=np.floor(new_cylinders)
+
+#searching and removing duplicates
+
+df=df.drop_duplicates()
 
 st.dataframe(df)
 
@@ -32,7 +52,7 @@ st.markdown(
 
 color_index=[]
 for c in df.paint_color:
-    if pd.isna(c):
+    if c== 'Unknown':
         color_index.append('no color is listed')
     else:
         color_index.append('a color is listed')
